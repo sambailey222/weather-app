@@ -14,6 +14,7 @@ const userInput = document.getElementById("search");
 const submitBtn = document.getElementById("submit");
 
 submitBtn.addEventListener("click", () => {
+  errorMsg.style.visibility = "hidden";
   locale = userInput.value;
   getWeatherData(locale);
 });
@@ -26,16 +27,23 @@ userInput.addEventListener("keyup", function(event) {
     }
 });
 
+const errorMsg = document.getElementById("error");
+
 async function getWeatherData(location) {
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=${units}&appid=${key}`, {
-    mode: 'cors'
-  })
-  const weatherData = await response.json();//return resolved response as json
-  console.log(weatherData);
-  const weatherDataObject = processData(weatherData);
-  console.log(weatherDataObject);
-  displayData(weatherDataObject);
-  return weatherDataObject;
+  try {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=${units}&appid=${key}`, {
+      mode: 'cors'
+    })
+    console.log(response.status);
+    const weatherData = await response.json();//return resolved response as json
+    console.log(weatherData);
+    const weatherDataObject = processData(weatherData);
+    console.log(weatherDataObject);
+    displayData(weatherDataObject);
+    return weatherDataObject;
+  } catch (error) {
+    errorMsg.style.visibility = "visible";
+  }
 };
 
 // console.log(getWeatherData("london"));
@@ -76,11 +84,18 @@ const feelsLike = document.getElementById("feels-like");
 const wind = document.getElementById("wind");
 
 function displayData(weatherDataObject) {
+  let displayUnit = "C"
+  if (units === "imperial") {
+    displayUnit = "F";
+  } else {
+    displayUnit = "C";
+  }
+
   placeName.innerHTML = weatherDataObject.name;
   icon.src = `https://openweathermap.org/img/wn/${weatherDataObject.icon}@2x.png`;
   weatherType.innerHTML = weatherDataObject.word;
-  temp.innerHTML = `${weatherDataObject.temp} &#176 C`;
-  feelsLike.innerHTML = `${weatherDataObject.feels_like} &#176 C`;
+  temp.innerHTML = `${weatherDataObject.temp} &#176 ${displayUnit}`;
+  feelsLike.innerHTML = `${weatherDataObject.feels_like} &#176 ${displayUnit}`;
   wind.innerHTML = `${displayWindUnits(weatherDataObject)} mph`;
 }
 
@@ -106,3 +121,5 @@ function changeUnits() {
   getWeatherData(locale);
 }
 
+// add error handling
+// tidy up css
