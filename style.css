@@ -1,3 +1,51 @@
+* {
+  font-family: "arial";
+}
+
 #error {
   visibility:hidden;
+}
+
+.container {
+  text-align: center;
+}
+
+#search-container {
+  text-align: center;
+  background-color: #343a40;
+  padding-top: 5%;
+  padding-bottom: 2.5%;
+}
+
+#submit {
+  background-color: #eb6f4c;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  color: #f2f2f2;
+}
+
+#changeUnits {
+  border-radius: 2px;
+  border: 1px solid transparent;
+}
+
+#search {
+  border-radius: 2px;
+  border: 1px solid transparent;
+}
+
+#logo {
+  width: 20%;
+  margin: auto;
+  display: block;
+  margin-bottom: 3%;
+}
+
+.small-text {
+  color: #eb6f4c;
+}
+
+#error {
+  color: #eb6f4c;
+  margin-top: 1%;
 }

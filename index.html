@@ -13,19 +13,23 @@
 
 <body>
 
-
-  <input type="search" id="search" placeholder="Search.." name="search">
-  <button type="submit" id="submit">Submit</button>
-  <button type="button" id="changeUnits">&#176C / &#176F</button>
-  <div id="error">Location not found.</div>
+  <div id="search-container">
+    <img id="logo" src="OWM_logo_white_cropped.png">
+    <input type="search" id="search" placeholder="Search.." name="search">
+    <button type="submit" id="submit">Submit</button>
+    <button type="button" id="changeUnits">&#176C / &#176F</button>
+    <div id="error">Location not found.</div>
+  </div>
   <div class="container">
       <h1 id="placeName">London</h1>
       <img id="icon">
       <h2 id="weather-type">Cloudy</h2>
       <h2 id="temp">21 C</h2>
-      Feels like:
+      <p class="small-text">Feels like:</p>
       <h3 id="feels-like">21 C</h3>
-      Wind:
+      <p class="small-text">Humidity:</p>
+      <h3 id="humidity">5%</h3>
+      <p class="small-text">Wind:</p>
       <h3 id="wind">23mph</h3>
   </div>
   

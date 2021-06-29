@@ -1,14 +1,6 @@
 const key = "";
 let units = "metric";
-let locale = "london"
-
-// function getWeatherData(location) {
-//   let weatherData = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}`, {
-//     mode: 'cors'
-//   })
-//     .then((response) => response.json()) //return resolved response as json
-//     .then((data) => data);
-// };
+let locale = "london";
 
 const userInput = document.getElementById("search");
 const submitBtn = document.getElementById("submit");
@@ -65,6 +57,7 @@ function processData(weatherData) {
   let weatherObject = {
     name: weatherData.name,
     temp: weatherData.main.temp,
+    country: weatherData.sys.country,
     feels_like: weatherData.main.feels_like,
     description: weatherData.weather[0].description,
     icon: weatherData.weather[0].icon,
@@ -82,6 +75,7 @@ const weatherType = document.getElementById("weather-type");
 const temp = document.getElementById("temp");
 const feelsLike = document.getElementById("feels-like");
 const wind = document.getElementById("wind");
+const humidity = document.getElementById("humidity");
 
 function displayData(weatherDataObject) {
   let displayUnit = "C"
@@ -91,11 +85,12 @@ function displayData(weatherDataObject) {
     displayUnit = "C";
   }
 
-  placeName.innerHTML = weatherDataObject.name;
+  placeName.innerHTML = `${weatherDataObject.name}, ${weatherDataObject.country}`;
   icon.src = `https://openweathermap.org/img/wn/${weatherDataObject.icon}@2x.png`;
   weatherType.innerHTML = weatherDataObject.word;
   temp.innerHTML = `${weatherDataObject.temp} &#176 ${displayUnit}`;
   feelsLike.innerHTML = `${weatherDataObject.feels_like} &#176 ${displayUnit}`;
+  humidity.innerHTML = `${weatherDataObject.humidity}%`;
   wind.innerHTML = `${displayWindUnits(weatherDataObject)} mph`;
 }
 
@@ -121,5 +116,3 @@ function changeUnits() {
   getWeatherData(locale);
 }
 
-// add error handling
-// tidy up css
